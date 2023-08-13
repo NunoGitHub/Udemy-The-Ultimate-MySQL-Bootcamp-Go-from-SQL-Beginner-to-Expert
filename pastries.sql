@@ -66,4 +66,26 @@ insert into shop (name) values ('mari\'os bros');
 
 insert into shop (name) values ('mari\'os "bros"');
 
+-- set default values
+CREATE TABLE cats3 (
+     name VARCHAR(100) DEFAULT 'unnamed',
+     age INT DEFAULT 99
+);
+
+insert into cats3(age) values(5);
+
+SELECT* FROM cats3;
+
+
+
+-- CANT PUT NULL VALUES
+CREATE TABLE cats4 (
+     name VARCHAR(100) NOT NULL DEFAULT 'unnamed',
+     age INT NOT NULL DEFAULT 99
+);
+
+DESC CATS4
+
+
+
 
