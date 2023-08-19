@@ -50,3 +50,25 @@ ORDER BY age DESC
 SELECT * FROM cats WHERE age=4
 
 SELECT * FROM cats WHERE name = 'Egg'
+
+SELECT cat_id FROM cats
+
+SELECT name, breed from cats
+
+
+SELECT name, age from cats WHERE breed = 'Tabby'
+
+SELECT cat_id, age FROM cats WHERE cat_id = age
+
+SELECT cat_id as id, age FROM cats
+
+
+UPDATE cats set age=14  WHERE name='Misty'
+
+-- emploees update
+
+UPDATE employees set last_name = 'who cares'
+
+UPDATE employees set current_status ='laid-off' WHERE last_name='who cares'
+
+
