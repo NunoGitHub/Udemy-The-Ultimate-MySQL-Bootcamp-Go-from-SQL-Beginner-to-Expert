@@ -89,3 +89,18 @@ DESC CATS4
 
 
 
+CREATE TABLE Employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    last_name VARCHAR(100) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    middle_name VARCHAR(100),
+    age INT NOT NULL,
+    current_status VARCHAR(50) NOT NULL DEFAULT 'employed'
+);
+
+DESC Employees;
+
+INSERT INTO employees (last_name, first_name, age) VALUES ('fernado', 'manuel',20);
+INSERT INTO employees (last_name, first_name, age) VALUES ('fernado', 'manuel',20);
+
+SELECT * FROM employees;
