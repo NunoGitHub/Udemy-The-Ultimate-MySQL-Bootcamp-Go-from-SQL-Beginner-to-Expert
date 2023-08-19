@@ -65,6 +65,23 @@ SELECT cat_id as id, age FROM cats
 
 UPDATE cats set age=14  WHERE name='Misty'
 
+UPDATE cats set name='Jack' WHERE name='Jackson'
+
+
+UPDATE cats SET breed='British Shortair' WHERE name='Ringo'
+
+UPDATE cats set age=12 WHERE breed='Maine Coon'
+
+-- 
+
+DELETE FROM cats WHERE age =4
+
+DELETE FROM cats WHERE age = cat_id
+
+
+
+
+
 -- emploees update
 
 UPDATE employees set last_name = 'who cares'
