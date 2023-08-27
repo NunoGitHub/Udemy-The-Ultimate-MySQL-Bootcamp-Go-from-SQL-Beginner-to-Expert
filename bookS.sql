@@ -69,3 +69,88 @@ SELECT SUBSTR(title, 1, 15) as title FROM books
 
 
 SELECT SUBSTRING(author_lname, 1,1) as initial , author_lname FROM books
+
+
+SELECT CONCAT( SUBSTR(title, 1,19), '...') as shortTitle FROM books
+
+SELECT CONCAT(SUBSTR(author_fname,1,1), '.' , SUBSTR(author_lname,1,1), '.') as author_initial FROM books
+
+SELECT REPLACE('Hello World', 'Hell', '%$#@')
+
+select REPLACE('cheese bread coffe milk', ' ', ' and ')
+
+
+SELECT REPLACE(title, ' ', '-') FROM books
+
+
+SELECT REVERSE('hello world')
+
+SELECT REVERSE('chicken nuggets')
+
+
+SELECT REVERSE(author_fname) as reverse_namef FROM books
+
+
+SELECT CONCAT(author_fname,REVERSE(author_fname )) FROM books
+
+SELECT author_fname ,CHARACTER_LENGTH(author_fname) as length  FROM books
+
+SELECT title ,CHARACTER_LENGTH(title) as length FROM books
+
+-- bytes size
+SELECT title ,LENGTH(title) as lengthBytes FROM books
+
+
+SELECT UPPER(title) FROM books
+
+SELECT LOWER(title) FROM books
+
+
+SELECT REPLACE( CONCAT(UPPER('i love the '), UPPER(title), ' ! ! !'), 'THE THE', 'THE') FROM books
+
+
+SELECT CONCAT('I LOVE ', UPPER(title), ' ! ! !') FROM books
+
+-- examples
+SELECT INSERT('hello bobby', 6,0,'there')
+
+SELECT INSERT('hello bobby', 6,4,'there')
+
+SELECT LEFT('helloworldomg',3)
+
+SELECT RIGHT('helloworldomg',3)
+
+
+SELECT LEFT(title,1) FROM books
+
+SELECT REPEAT('ha',3)
+
+SELECT TRIM('  boston') FROM books
+
+-- remove specified character with trim
+SELECT  TRIM(LEADING  '.' FROM '................San antonio.. ')
+
+SELECT  TRIM(TRAILING  '.' FROM '................San antonio..')
+
+SELECT  TRIM(BOTH  '.' FROM '................San antonio..')
+
+-- exercises
+
+SELECT REVERSE(UPPER('Why does my cat look ate me with such hatred'))
+
+SELECT REPLACE(title, ' ', '->') as title FROM books
+
+SELECT author_lname as forwards, REVERSE(author_lname) as backwards FROM books
+
+SELECT UPPER( CONCAT_WS(' ', author_fname, author_lname)) as full_name_in_caps FROM books
+
+SELECT CONCAT_WS(' was released in ', title, released_year) as blurb FROM books
+
+SELECT title ,CHARACTER_LENGTH(title) as character_count FROM books
+
+
+SELECT CONCAT(SUBSTRING(title,1,10), '...') as short_title, CONCAT_WS(',', author_lname,author_fname) as author, CONCAT(stock_quantity, ' in stock') as quantity FROM books
+
+
+
+
