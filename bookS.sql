@@ -153,4 +153,206 @@ SELECT CONCAT(SUBSTRING(title,1,10), '...') as short_title, CONCAT_WS(',', autho
 
 
 
+CREATE Table new_books
+(
+		book_id INT NOT NULL AUTO_INCREMENT,
+		title VARCHAR(100),
+		author_fname VARCHAR(100),
+		author_lname VARCHAR(100),
+		released_year INT,
+		stock_quantity INT,
+		pages INT,
+		PRIMARY KEY(book_id)
+	);
+
+
+
+INSERT INTO new_books
+    (title, author_fname, author_lname, released_year, stock_quantity, pages)
+    VALUES ('10% Happier', 'Dan', 'Harris', 2014, 29, 256), 
+           ('fake_book', 'Freida', 'Harris', 2001, 287, 428),
+           ('Lincoln In The Bardo', 'George', 'Saunders', 2017, 1000, 367);
+
+
+SELECT * FROM new_books
+
+
+
+INSERT INTO books
+    (title, author_fname, author_lname, released_year, stock_quantity, pages)
+    VALUES ('10% Happier', 'Dan', 'Harris', 2014, 29, 256), 
+           ('fake_book', 'Freida', 'Harris', 2001, 287, 428),
+           ('Lincoln In The Bardo', 'George', 'Saunders', 2017, 1000, 367);
+
+
+SELECT  DISTINCT CONCAT_WS(' ', author_fname, author_lname) FROM books
+
+SELECT DISTINCT author_fname, author_fname FROM books
+
+SELECT DISTINCT author_fname, author_fname, released_year FROM books
+
+
+SELECT * FROM books
+ORDER BY released_year  DESC
+
+SELECT author_fname FROM books
+ORDER BY author_fname  DESC
+
+SELECT * FROM books
+ORDER BY pages DESC
+
+-- order by second column
+SELECT title, author_fname, author_lname, released_year FROM books
+ORDER BY 2 DESC
+
+
+-- order by author_lname and then by author_fname
+SELECT * FROM books
+ORDER BY author_lname, author_fname
+
+
+SELECT title, author_lname, released_year FROM books
+ORDER BY author_lname , released_year DESC
+
+
+SELECT CONCAT_WS(' ', author_fname, author_lname) as author FROM books
+ORDER BY author
+
+-- LIMIT
+
+SELECT * FROM books
+ORDER BY released_year
+LIMIT 5
+
+-- start in 1 and get 5
+SELECT * FROM books
+ORDER BY released_year
+LIMIT 1,5
+
+-- searching
+-- % -> 0 or more characters
+
+SELECT * FROM books
+WHERE author_fname LIKE '%ray%'
+
+SELECT * FROM books
+WHERE author_fname LIKE '%da%'
+
+-- '%:%' -> characters befor and after because of % before and after of the :
+SELECT * FROM books
+WHERE title LIKE '%:%'
+
+
+-- "_" exacly one character
+-- in this case 4  characters
+SELECT * FROM books
+WHERE author_fname LIKE '____'
+
+-- all author_fname unless is null 
+SELECT * FROM books
+WHERE author_fname LIKE '%'
+
+-- end with n letter, and anything before
+SELECT * FROM books
+WHERE author_fname LIKE '%n'
+
+
+-- match % sign
+
+SELECT * FROM books
+WHERE title LIKE '%\%%'
+
+-- exercise
+
+
+SELECT title FROM books
+WHERE title LIKE '%stories%'
+
+-- longest title
+SELECT title, pages FROM books
+ORDER BY CHARACTER_LENGTH(title) DESC LIMIT 1 
+
+-- longest book
+
+SELECT title, pages FROM books
+ORDER BY pages DESC LIMIT 1 
+
+
+SELECT title, released_year  FROM books
+ORDER BY released_year DESC LIMIT 3
+
+SELECT CONCAT_WS(' - ', title, released_year) as summary  FROM books
+ORDER BY released_year DESC LIMIT 3
+
+SELECT title, author_lname FROM books
+WHERE author_lname LIKE '% %'
+
+SELECT title, released_year, stock_quantity FROM books
+ORDER BY stock_quantity ASC ,released_year DESC limit 3
+
+SELECT title, author_lname FROM books
+ORDER BY author_lname, title
+
+SELECT CONCAT(UPPER('my favorite author is '), UPPER(author_fname), ' ', UPPER(author_lname)) as yell FROM books
+ORDER BY author_lname
+
+-- agregate functions
+
+-- how many books
+SELECT count(*) FROM books
+
+SELECT COUNT(author_fname) FROM books
+
+
+SELECT COUNT(DISTINCT author_fname) FROM books
+
+
+SELECT COUNT(DISTINCT released_year) FROM books
+
+SELECT COUNT(DISTINCT author_lname) FROM books
+
+
+SELECT b.title, ab.c as countTotal FROM books as b
+LEFT JOIN (
+	(SELECT COUNT(*) as c FROM books as bb
+	WHERE bb.title LIKE '%the%'
+	) 
+)as ab ON 1=1
+WHERE b.title LIKE '%the%'
+
+SELECT b.title, (SELECT COUNT(*) FROM books WHERE title LIKE '%the%') as countTotal FROM books as b
+WHERE b.title LIKE '%the%'
+
+
+SELECT b.title, ab.c 
+FROM books as b 
+LEFT JOIN (
+    SELECT bb.book_id, COUNT(*) as c 
+    FROM books as bb 
+    WHERE bb.title LIKE '%the%'
+    GROUP BY bb.book_id
+) as ab ON ab.book_id = b.book_id 
+WHERE b.title LIKE '%the%';
+
+
+
+SELECT COUNT(*) as c FROM books as bb
+	WHERE bb.title LIKE '%the%'
+
+
+-- group BY
+SELECT  author_lname FROM books
+GROUP BY author_lname
+
+-- create groups, and count the number of people with the same last name in the same group
+SELECT  author_lname, COUNT(*) FROM books
+GROUP BY author_lname
+
+SELECT  author_lname, COUNT(*) as books_written FROM books
+GROUP BY author_lname 
+ORDER BY books_written DESC
+
+
+SELECT released_year, COUNT(*) FROM books
+GROUP BY released_year
 
